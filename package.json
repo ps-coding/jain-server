@@ -1,0 +1,24 @@
+{
+  "name": "jain-server",
+  "version": "1.0.0",
+  "description": "Jain food server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ps-coding/jain-server.git"
+  },
+  "keywords": [
+    "jain",
+    "food",
+    "server"
+  ],
+  "author": "ps-coding <prasham31@gmail.com> (https://shahprasham.com/)",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/ps-coding/jain-server/issues"
+  },
+  "homepage": "https://github.com/ps-coding/jain-server#readme"
+}
