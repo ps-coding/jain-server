@@ -2,7 +2,7 @@
   "name": "jain-server",
   "version": "1.0.0",
   "description": "Jain food server",
-  "main": "index.js",
+  "main": "api/index.js",
   "scripts": {
     "start": "node ."
   },
