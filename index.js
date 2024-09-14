@@ -25,6 +25,7 @@ const base64ImageOCR = async (base64Image) => {
     data: { text },
   } = await worker.recognize(imageBuffer);
   await worker.terminate();
+
   return text;
 };
 
