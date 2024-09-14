@@ -23,5 +23,11 @@
   "bugs": {
     "url": "https://github.com/ps-coding/jain-server/issues"
   },
-  "homepage": "https://github.com/ps-coding/jain-server#readme"
+  "homepage": "https://github.com/ps-coding/jain-server#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "openai": "^4.61.0",
+    "tesseract.js": "^5.1.1"
+  }
 }

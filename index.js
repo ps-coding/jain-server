@@ -43,13 +43,15 @@ const isJain = async (ingredients) => {
   return response.choices[0].message.content;
 };
 
-app.post("/isjain", async (req, res) => {
+app.get("/isjain", async (req, res) => {
   try {
     const { base64Image } = req.body;
     const ingredients = await base64ImageOCR(base64Image);
     const response = await isJain(ingredients);
     res.send(response);
-  } catch (_) {}
+  } catch (err) {
+    console.error("Error:", err);
+  }
 });
 
 app.listen(port, () => {
