@@ -3,7 +3,7 @@ require("dotenv").config();
 const process = require("process");
 const express = require("express");
 const openai = require("openai");
-const { createWorker } = require("tesseract.js");
+const tesseract = require("tesseract.js");
 
 const app = express();
 const port = process.env["PORT"] || 3000;
@@ -15,18 +15,8 @@ const client = new openai.OpenAI({
 });
 
 const base64ImageOCR = async (base64Image) => {
-  const imageBuffer = Buffer.from(base64Image, "base64");
-
-  const worker = createWorker();
-  await worker.load();
-  await worker.loadLanguage("eng");
-  await worker.initialize("eng");
-  const {
-    data: { text },
-  } = await worker.recognize(imageBuffer);
-  await worker.terminate();
-
-  return text;
+  const result = await tesseract.recognize(base64Image, "eng");
+  return result.data.text;
 };
 
 const isJain = async (ingredients) => {
@@ -34,7 +24,7 @@ const isJain = async (ingredients) => {
     messages: [
       {
         role: "user",
-        content: `Can the food with the following ingreidents be eaten by Jains? If not, what ingredients are problematic? Explain briefly in one sentence.\nIngredients: ${ingredients}`,
+        content: `Can the food with the following ingredients be eaten by Jains? If not, what ingredients are problematic and why?\nIngredients: ${ingredients}\nAnswer briefly with each ingredient and one sentence why. No need to say which ones are acceptable if some aren’t acceptable.`,
       },
     ],
     model: "gpt-4o-mini",
@@ -50,7 +40,7 @@ app.get("/isjain", async (req, res) => {
     const response = await isJain(ingredients);
     res.send(response);
   } catch (err) {
-    console.error("Error:", err);
+    console.error(err);
   }
 });
 
