@@ -4,7 +4,10 @@
   "description": "Jain food server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ."
+  },
+  "engines": {
+    "node": "20.x"
   },
   "repository": {
     "type": "git",
@@ -15,7 +18,7 @@
     "food",
     "server"
   ],
-  "author": "ps-coding <prasham31@gmail.com> (https://shahprasham.com/)",
+  "author": "Vivaan Shah & Prasham Shah",
   "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/ps-coding/jain-server/issues"
