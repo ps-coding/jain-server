@@ -38,7 +38,7 @@ app.get("/isjain", async (req, res) => {
     const { base64Image } = req.body;
     const ingredients = await base64ImageOCR(base64Image);
     const response = await isJain(ingredients);
-    res.send(response);
+    res.json({ response });
   } catch (err) {
     console.error(err);
   }
