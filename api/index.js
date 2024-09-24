@@ -2,12 +2,14 @@ require("dotenv").config();
 
 const process = require("process");
 const express = require("express");
+const cors = require("cors");
 const openai = require("openai");
 const tesseract = require("tesseract.js");
 
 const app = express();
 const port = process.env["PORT"] || 3000;
 
+app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 
 const client = new openai.OpenAI({
