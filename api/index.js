@@ -15,7 +15,11 @@ const client = new openai.OpenAI({
 });
 
 const base64ImageOCR = async (base64Image) => {
-  const result = await tesseract.recognize(base64Image, "eng");
+  const worker = await tesseract.createWorker("eng", 1, {
+    workerPath: "./node_modules/tesseract.js/src/worker-script/node/index.js",
+  });
+  const result = await worker.recognize(base64Image);
+  await worker.terminate();
   return result.data.text;
 };
 
