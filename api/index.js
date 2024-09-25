@@ -30,7 +30,7 @@ const isJain = async (ingredients) => {
     messages: [
       {
         role: "user",
-        content: `Can the food with the following ingredients be eaten by Jains? If not, what ingredients are problematic and why?\nIngredients: ${ingredients}\nAnswer briefly with each ingredient and one sentence why. No need to say which ones are acceptable if some aren’t acceptable.`,
+        content: `Can the food with the following ingredients be eaten by Jains? Just answer YES or NO followed by one sentence with a concise list of the problematic ingredients with just a few words about why they are problematic. As a reminder, Jains cannot eat any product that contains eggs, meat, gelatin, rennet, potatoes, onions, garlic, carrots, root vegetables, or any other items that are prohibited by Jain scriptures or generally created by the killing of animals.\nIngredients: ${ingredients}`,
       },
     ],
     model: "gpt-4o-mini",
@@ -42,8 +42,12 @@ const isJain = async (ingredients) => {
 app.post("/isjain", async (req, res) => {
   try {
     const { base64Image } = req.body;
+    console.time("ocr");
     const ingredients = await base64ImageOCR(base64Image);
+    console.timeEnd("ocr");
+    console.time("openai");
     const response = await isJain(ingredients);
+    console.timeEnd("openai");
     res.json({ response });
   } catch (err) {
     console.error(err);
