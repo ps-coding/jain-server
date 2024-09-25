@@ -42,12 +42,8 @@ const isJain = async (ingredients) => {
 app.post("/isjain", async (req, res) => {
   try {
     const { base64Image } = req.body;
-    console.time("ocr");
     const ingredients = await base64ImageOCR(base64Image);
-    console.timeEnd("ocr");
-    console.time("openai");
     const response = await isJain(ingredients);
-    console.timeEnd("openai");
     res.json({ response });
   } catch (err) {
     console.error(err);
