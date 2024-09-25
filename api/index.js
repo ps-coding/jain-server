@@ -39,7 +39,7 @@ const isJain = async (ingredients) => {
   return response.choices[0].message.content;
 };
 
-app.get("/isjain", async (req, res) => {
+app.post("/isjain", async (req, res) => {
   try {
     const { base64Image } = req.body;
     const ingredients = await base64ImageOCR(base64Image);
